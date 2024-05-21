@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fighting Championship Manager</title>
+</head>
+<body>
+    <h1>Fighting Championship Manager</h1>
+    <a href="{{ url_for('add_fighter') }}">Add New Fighter</a>
+    <h2>Fighters List</h2>
+    <ul>
+        {% for fighter in fighters %}
+            <li>{{ fighter }}
+                <a href="{{ url_for('edit_fighter', name=fighter.name, weight_class=fighter.weight_class) }}">Edit</a>
+                <form action="{{ url_for('delete_fighter', name=fighter.name, weight_class=fighter.weight_class) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <h3>Save Championship</h3>
+    <form action="{{ url_for('save_championship') }}" method="post">
+        <input type="text" name="filepath" placeholder="Filepath to save" required>
+        <button type="submit">Save Championship</button>
+    </form>
+    <h3>Load Championship</h3>
+    <form action="{{ url_for('load_championship') }}" method="post">
+        <input type="text" name="filepath" placeholder="Filepath to load" required>
+        <button type="submit">Load Championship</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Fighter</title>
+</head>
+<body>
+    <h1>Edit Fighter</h1>
+    <form action="{{ url_for('edit_fighter', name=fighter.name, weight_class=fighter.weight_class) }}" method="post">
+        <input type="number" name="wins" placeholder="Wins" value="{{ fighter.wins }}">
+        <input type="number" name="losses" placeholder="Losses" value="{{ fighter.losses }}">
+        <input type="text" name="ranking" placeholder="Ranking" value="{{ fighter.ranking }}">
+        <button type="submit">Update Fighter</button>
+    </form>
+    <a href="{{ url_for('index') }}">Back to Fighters List</a>
+</body>
+</html>
